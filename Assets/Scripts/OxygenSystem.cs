@@ -33,6 +33,7 @@ public class OxygenSystem : MonoBehaviour
             currentOxygen = 0;
             levelManager.OnPlayerDrowned();
         }
+        Debug.Log(currentOxygen);
     }
 
     public void RefillOxygen()
