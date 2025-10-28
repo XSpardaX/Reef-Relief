@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
             moveDirection.x = -1;
     }
-
+    
     void FixedUpdate()
     {
         Vector2 targetVelocity = moveDirection.normalized * moveSpeed;
