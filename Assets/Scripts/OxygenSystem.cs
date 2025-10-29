@@ -10,7 +10,7 @@ public class OxygenSystem : MonoBehaviour
     public float depthMultiplier = 0.05f;
     public float fastDrainMultiplier = 1f;
     public Slider oxygenBar;
-
+    public float CurrentOxygen => currentOxygen;
     private LevelManager levelManager;
 
     void Start()

@@ -218,7 +218,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1380645607
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -5156761345946572608, guid: 1f52441472217e248bfc0b6e8821e73f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -244,7 +244,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
   moveSpeed: 5
+  sprintMultiplier: 2
+  lowOxygenSpeedMultiplier: 0.5
   rotationSpeed: 720
+  animator: {fileID: 7272620520954779539}
+  oxygenSystem: {fileID: -2306345957783536635}
 --- !u!50 &6364483171846828332
 Rigidbody2D:
   serializedVersion: 5
@@ -316,7 +320,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.72, y: 2.39}
   m_EdgeRadius: 0
 --- !u!114 &-2306345957783536635
 MonoBehaviour:

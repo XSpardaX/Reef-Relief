@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Trash
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -43,6 +45,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 3262293701
+    locked: 0
+  - name: Obstacle
+    uniqueID: 1493264355
     locked: 0
   - name: Trash items
     uniqueID: 3996957749

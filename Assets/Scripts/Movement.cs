@@ -1,9 +1,16 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Movement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float rotationSpeed = 720f; // Degrees per second
+    public float sprintMultiplier = 1.5f;
+    public float lowOxygenSpeedMultiplier = 0.5f; 
+    public float rotationSpeed = 720f;
+
+    public Animator animator; 
+    public OxygenSystem oxygenSystem; 
+
     private Rigidbody2D rb;
     private Vector2 moveDirection;
     private bool facingRight = true;
@@ -25,29 +32,37 @@ public class Movement : MonoBehaviour
             moveDirection.x = 1;
         if (Input.GetKey(KeyCode.A))
             moveDirection.x = -1;
+
+        bool isMoving = moveDirection.sqrMagnitude > 0.01f;
+        animator.SetBool("isSwimming", isMoving);
+
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        animator.speed = isSprinting ? 1.5f : 1f;
     }
-    
+
     void FixedUpdate()
     {
-        Vector2 targetVelocity = moveDirection.normalized * moveSpeed;
+        float currentSpeed = moveSpeed;
+
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            currentSpeed *= sprintMultiplier;
+
+        if (oxygenSystem != null && oxygenSystem.CurrentOxygen <= 0)
+            currentSpeed *= lowOxygenSpeedMultiplier;
+
+        Vector2 targetVelocity = moveDirection.normalized * currentSpeed;
         rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, 0.1f);
 
         if (moveDirection.sqrMagnitude > 0.01f)
         {
-            // Flip character based on horizontal direction
             if (moveDirection.x < 0 && facingRight)
                 Flip();
             else if (moveDirection.x > 0 && !facingRight)
                 Flip();
 
-            // Calculate target rotation angle (relative to facing direction)
             float angle = Mathf.Atan2(moveDirection.y, Mathf.Abs(moveDirection.x)) * Mathf.Rad2Deg;
-
-            // Invert rotation if flipped
             if (!facingRight)
                 angle = -angle;
-
-            // Smoothly rotate toward target
             float newAngle = Mathf.LerpAngle(rb.rotation, angle, rotationSpeed * Time.fixedDeltaTime / 360f);
             rb.MoveRotation(newAngle);
         }
@@ -57,8 +72,7 @@ public class Movement : MonoBehaviour
     {
         facingRight = !facingRight;
         Vector3 scale = transform.localScale;
-        scale.x *= -1; // Mirror horizontally
+        scale.x *= -1;
         transform.localScale = scale;
     }
 }
-
