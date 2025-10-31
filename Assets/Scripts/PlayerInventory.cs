@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
     public int trashCount = 0;
     public int maxTrash = 5;
+
+    public TMP_Text trashHeld;
     //public TextMeshProUGUI trashText;
 
     public bool CanCollect() => trashCount < maxTrash;
@@ -24,7 +28,10 @@ public class PlayerInventory : MonoBehaviour
 
     private void UpdateUI()
     {
-       // if (trashText)
-       //     trashText.text = $"Trash: {trashCount}/{maxTrash}";
+        if (trashCount == maxTrash)
+        {
+            trashHeld.text = "Deposit garbage: " + trashCount + "/" + maxTrash;
+        }
+        else { trashHeld.text = "Gaarbage held: " + trashCount + "/" + maxTrash; }
     }
 }

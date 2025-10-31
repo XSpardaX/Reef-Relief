@@ -56,5 +56,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public float GetElapsedTime()
+    {
+        return Time.time - startTime;
+    }
+
     public void StopTimer() => timerRunning = false;
 }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class OxygenSystem : MonoBehaviour
 {
-    public float maxOxygen = 100f;
+    public float maxOxygen;
     public float currentOxygen;
     public float baseDrainRate = 1f;
     public float depthMultiplier = 0.05f;
@@ -15,6 +15,7 @@ public class OxygenSystem : MonoBehaviour
 
     void Start()
     {
+        maxOxygen = 100f;
         currentOxygen = maxOxygen;
         levelManager = FindAnyObjectByType<LevelManager>();
     }
@@ -33,7 +34,6 @@ public class OxygenSystem : MonoBehaviour
             currentOxygen = 0;
             levelManager.OnPlayerDrowned();
         }
-        Debug.Log(currentOxygen);
     }
 
     public void RefillOxygen()

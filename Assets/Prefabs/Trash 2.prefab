@@ -176,5 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trashitem
   isCollected: 0
-  zoomOutAmount: 0.2
+  zoomOutAmount: 2
   speedBoost: 0.5
+  bobHeight: 0.25
+  bobSpeed: 2
